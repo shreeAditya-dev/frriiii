@@ -1,0 +1,594 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f1e9;
+    color: #171717;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.archive {
+    width: 90%;
+    max-width: 1250px;
+    margin: auto;
+    padding: 70px 0;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+    min-height: 70vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    border-bottom: 1px solid #222;
+
+    margin-bottom: 130px;
+}
+
+.eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 4px;
+
+    color: #777;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(60px, 9vw, 125px);
+
+    line-height: 0.88;
+
+    letter-spacing: -6px;
+
+    font-weight: 800;
+}
+
+.hero h1 em {
+    font-family: Georgia, serif;
+
+    font-weight: 400;
+
+    color: #777;
+}
+
+.intro {
+    max-width: 520px;
+
+    margin-top: 45px;
+
+    font-family: Georgia, serif;
+
+    font-size: 19px;
+
+    line-height: 1.6;
+
+    color: #555;
+}
+
+
+/* =========================================
+   FRIEND SECTION
+========================================= */
+
+.friend {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 90px;
+
+    align-items: center;
+
+    margin-bottom: 170px;
+}
+
+
+/* =========================================
+   AUTOMATIC ALTERNATING LAYOUT
+========================================= */
+
+/* Odd sections:
+   IMAGE LEFT
+   ABOUT RIGHT
+*/
+
+.friend:nth-of-type(odd) {
+    grid-template-areas: "photo content";
+}
+
+
+/* Even sections:
+   IMAGE RIGHT
+   ABOUT LEFT
+*/
+
+.friend:nth-of-type(even) {
+    grid-template-areas: "content photo";
+}
+
+
+/* Assign grid areas */
+
+.photo-wrap {
+    grid-area: photo;
+}
+
+.friend-content {
+    grid-area: content;
+}
+
+
+/* =========================================
+   IMAGE
+========================================= */
+
+.photo-wrap {
+    position: relative;
+
+    width: 100%;
+    height: 560px;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background: #ddd;
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.12),
+        0 5px 15px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+}
+
+
+/* Image itself */
+
+.photo-wrap img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    /* ORIGINAL COLOR */
+    filter: none;
+
+    transition:
+        transform 0.7s cubic-bezier(.2,.8,.2,1);
+}
+
+
+/* =========================================
+   IMAGE HOVER
+========================================= */
+
+.photo-wrap:hover {
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.18),
+        0 10px 25px rgba(0, 0, 0, 0.10);
+}
+
+.photo-wrap:hover img {
+    transform: scale(1.05);
+}
+
+
+/* =========================================
+   IMAGE DARK OVERLAY
+========================================= */
+
+.photo-wrap::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: linear-gradient(
+        to bottom,
+        transparent 65%,
+        rgba(0, 0, 0, 0.12)
+    );
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   NUMBER BADGE
+========================================= */
+
+.photo-number {
+    position: absolute;
+
+    top: 18px;
+    left: 18px;
+
+    z-index: 5;
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.92);
+
+    backdrop-filter: blur(10px);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.15);
+
+    transition:
+        transform 0.4s ease,
+        background 0.4s ease;
+}
+
+.photo-wrap:hover .photo-number {
+    transform: rotate(8deg) scale(1.08);
+
+    background: #fff;
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.friend-content {
+    padding: 20px;
+
+    transition:
+        transform 0.5s ease;
+}
+
+.friend:hover .friend-content {
+    transform: translateY(-8px);
+}
+
+
+/* =========================================
+   NAME
+========================================= */
+
+.friend-content h2 {
+    font-size: clamp(48px, 6vw, 82px);
+
+    line-height: 0.95;
+
+    letter-spacing: -4px;
+
+    font-weight: 800;
+
+    margin-bottom: 25px;
+
+    transition:
+        letter-spacing 0.4s ease;
+}
+
+.friend:hover .friend-content h2 {
+    letter-spacing: -2px;
+}
+
+
+/* =========================================
+   LINE
+========================================= */
+
+.line {
+    width: 100%;
+
+    height: 1px;
+
+    background: #222;
+
+    margin-bottom: 30px;
+
+    position: relative;
+}
+
+.line::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+
+    top: 50%;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #222;
+
+    transform: translateY(-50%);
+
+    transition:
+        transform 0.4s ease;
+}
+
+.friend:hover .line::after {
+    transform:
+        translateY(-50%)
+        scale(1.6);
+}
+
+
+/* =========================================
+   ABOUT
+========================================= */
+
+.about {
+    max-width: 560px;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 20px;
+
+    line-height: 1.75;
+
+    color: #4d4d4d;
+}
+
+
+/* =========================================
+   SIGNATURE
+========================================= */
+
+.signature {
+    margin-top: 50px;
+
+    padding: 18px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background: rgba(255, 255, 255, 0.55);
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.07);
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.signature:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 18px 35px rgba(0, 0, 0, 0.12);
+}
+
+
+/* Signature text */
+
+.signature span {
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    color: #777;
+
+    white-space: nowrap;
+}
+
+
+/* Signature image */
+
+.signature img {
+    width: 135px;
+
+    height: 65px;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+
+    padding: 5px;
+
+    background: #fff;
+
+    box-shadow:
+        0 6px 15px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.4s ease;
+}
+
+.signature:hover img {
+    transform: rotate(-3deg) scale(1.05);
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    border-top: 1px solid #222;
+
+    padding: 40px 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    color: #777;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .archive {
+        width: 92%;
+
+        padding: 40px 0;
+    }
+
+    .hero {
+        min-height: 60vh;
+
+        margin-bottom: 80px;
+    }
+
+    .hero h1 {
+        font-size: 55px;
+
+        letter-spacing: -3px;
+    }
+
+    .intro {
+        font-size: 16px;
+
+        margin-top: 30px;
+    }
+
+
+    /* Mobile: image first, text second */
+
+    .friend,
+    .friend:nth-of-type(odd),
+    .friend:nth-of-type(even) {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 35px;
+
+        margin-bottom: 110px;
+    }
+
+    .photo-wrap {
+        width: 100%;
+
+        height: 430px;
+
+        border-radius: 22px;
+    }
+
+    .friend-content {
+        width: 100%;
+
+        padding: 0;
+    }
+
+    .friend-content h2 {
+        font-size: 52px;
+
+        letter-spacing: -3px;
+    }
+
+    .about {
+        font-size: 18px;
+
+        line-height: 1.65;
+    }
+
+    .signature {
+        margin-top: 35px;
+    }
+
+    footer {
+        flex-direction: column;
+
+        gap: 12px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+    .hero h1 {
+        font-size: 46px;
+    }
+
+    .photo-wrap {
+        height: 350px;
+
+        border-radius: 18px;
+    }
+
+    .friend-content h2 {
+        font-size: 44px;
+    }
+
+    .about {
+        font-size: 17px;
+    }
+
+    .signature {
+        padding: 14px;
+    }
+
+    .signature img {
+        width: 105px;
+        height: 55px;
+    }
+}
+
